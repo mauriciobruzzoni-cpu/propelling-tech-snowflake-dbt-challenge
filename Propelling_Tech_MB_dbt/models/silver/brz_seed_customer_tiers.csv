@@ -1,0 +1,4 @@
+min_balance,max_balance,customer_tier,tier_description
+-999999999,-0.01,In Debt,Customers with negative balance
+0,5000.00,Standard,Regular customers with positive balance
+5000.01,999999999,High Value,Premium customers with large balances

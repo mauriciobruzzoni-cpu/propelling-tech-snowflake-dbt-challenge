@@ -1,0 +1,12 @@
+Propelling_Tech_MB_dbt:
+  target: dev
+  outputs:
+    dev:
+      type: snowflake
+      role: SYSADMIN
+      warehouse: DBT_MB_WH
+      database: PROPELLING_TECH_MB_DB
+      schema: BRONZE
+      threads: 8
+      user: MAURICIOBRUZZONI
+

@@ -1,0 +1,33 @@
+name: Propelling_Tech_MB_dbt
+version: 1.0.0
+config-version: 2
+profile: Propelling_Tech_MB_dbt
+model-paths:
+  - models
+analysis-paths:
+  - analyses
+test-paths:
+  - tests
+seed-paths:
+  - seeds
+macro-paths:
+  - macros
+snapshot-paths:
+  - snapshots
+models:
+  Propelling_Tech_MB_dbt:
+    bronze:
+      +schema: BRONZE
+      +materialized: view
+    silver:
+      +schema: SILVER
+      +materialized: table
+    gold:
+      +schema: GOLD
+      +materialized: table
+seeds:
+  Propelling_Tech_MB_dbt:
+    +schema: BRONZE  
+
+
+    

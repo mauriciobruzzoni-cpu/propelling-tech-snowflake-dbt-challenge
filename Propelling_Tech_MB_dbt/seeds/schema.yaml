@@ -1,0 +1,19 @@
+version: 2
+
+seeds:
+  - name: brz_seed_material_categories
+    description: "Mapeo estático de metales a categorías financieras para la capa Bronze."
+    config:
+      column_types:
+        material_base: varchar(50)
+        finance_category: varchar(100)
+    columns:
+      - name: material_base
+        description: "Nombre del material (ej. COPPER, BRASS)"
+        tests:
+          - unique
+          - not_null
+      - name: finance_category
+        description: "Categoría de coste asignada por el departamento financiero"
+        tests:
+          - not_null
