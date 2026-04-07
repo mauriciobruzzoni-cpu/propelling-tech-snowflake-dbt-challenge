@@ -4,20 +4,44 @@
 ) }}
 
 WITH inventory_fact AS (
-    SELECT * FROM {{ ref('slv_part_supp') }}
+    SELECT 
+        id_part_supplier,
+        id_part,
+        id_supplier,
+        available_quantity,
+        supply_cost,
+        total_stock_value    
+    FROM {{ ref('slv_part_supp') }}
 ),
 
 dim_part AS (
-    SELECT * FROM {{ ref('dim_part') }}
+    SELECT
+        id_part,
+        part_name,
+        part_type,
+        manufacturer,
+        brand    
+    FROM {{ ref('dim_part') }}
 ),
 
 dim_supplier AS (
-    SELECT * FROM {{ ref('dim_supplier') }}
+    SELECT
+        id_supplier,
+        supplier_name,
+        supplier_address,
+        phone_number,
+        financial_status,
+        id_nation    
+    FROM {{ ref('dim_supplier') }}
 ),
 
 -- Añadimos el CTE para la geografía
 dim_geography AS (
-    SELECT * FROM {{ ref('dim_geography') }}
+    SELECT 
+        id_nation,
+        nation_name,
+        region_name   
+    FROM {{ ref('dim_geography') }}
 )
 
 SELECT

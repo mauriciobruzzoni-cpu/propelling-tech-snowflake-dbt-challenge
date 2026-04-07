@@ -8,23 +8,70 @@
 }}
 
 WITH base_lineitem AS (
-    SELECT * FROM {{ ref('slv_lineitem') }}
+    SELECT 
+        id_lineitem,
+        id_order,
+        id_customer,
+        id_part,
+        id_supplier,
+        order_date,
+        ship_date,
+        commit_date,
+        receipt_date,
+        transit_days,
+        delay_days,
+        is_delayed,
+        order_status,
+        ship_mode,
+        ship_instructions,
+        quantity,
+        gross_amount,
+        net_amount,
+        total_amount_with_tax,
+        total_supply_cost,
+        profit_margin,
+        updated_at    
+    FROM {{ ref('slv_lineitem') }}
     {% if is_incremental() %}
     WHERE updated_at > (
         SELECT DATEADD(day, -7, COALESCE(MAX(updated_at), '1900-01-01'::timestamp_ntz))  FROM {{ this }})
     {% endif %}    
 ),
 dim_customer AS (
-    SELECT * FROM {{ ref('slv_customer') }}
+    SELECT
+        id_customer,
+        customer_name,
+        market_segment,
+        customer_tier,
+        id_nation    
+    FROM {{ ref('slv_customer') }}
 ),
 dim_part AS (
-    SELECT * FROM {{ ref('slv_part') }}
+    SELECT
+        id_part,
+        part_name,
+        manufacturer,
+        brand,
+        part_type,
+        material_base,
+        retail_price,
+        finance_category    
+    FROM {{ ref('slv_part') }}
 ),
 dim_supplier AS (
-    SELECT * FROM {{ ref('slv_supplier') }}
+    SELECT
+        id_supplier,
+        supplier_name,
+        id_nation,
+        financial_status 
+    FROM {{ ref('slv_supplier') }}
 ),
 dim_geography AS (
-    SELECT * FROM {{ ref('slv_geography') }}
+    SELECT
+        id_nation,
+        nation_name,
+        region_name  
+    FROM {{ ref('slv_geography') }}
 )
 
 SELECT 

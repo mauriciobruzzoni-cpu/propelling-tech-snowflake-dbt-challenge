@@ -9,16 +9,39 @@
 }}
 
 WITH brz_lineitem_cte AS (
-    SELECT * FROM {{ ref('brz_lineitem') }}
+    SELECT  
+        l_orderkey,
+        l_partkey,
+        l_suppkey,
+        l_linenumber,
+        l_quantity,
+        l_extendedprice,
+        l_discount,
+        l_tax,
+        l_shipmode,
+        l_shipinstruct,
+        l_shipdate,
+        l_commitdate,
+        l_receiptdate 
+    FROM {{ ref('brz_lineitem') }}
     {% if is_incremental() %}
     WHERE l_shipdate > (SELECT DATEADD(day, -7, MAX(ship_date)) FROM {{ this }})
     {% endif %}
 ),
 brz_partsupp_cte AS (
-    SELECT * FROM {{ ref('brz_partsupp') }}
+    SELECT 
+        ps_partkey,
+        ps_suppkey,
+        ps_supplycost
+    FROM {{ ref('brz_partsupp') }}
     ),  
 brz_orders_cte AS (
-    SELECT * FROM {{ ref('brz_orders') }}
+    SELECT
+        o_orderkey,
+        o_custkey,
+        o_orderdate,
+        o_orderstatus
+    FROM {{ ref('brz_orders') }}
 )    
 SELECT
     -- Creamos un ID único combinando pedido y número de línea

@@ -2,13 +2,23 @@
 {{ config(materialized='table') }}
 
 WITH brz_partsupp AS (
-    SELECT * FROM {{ ref('brz_partsupp') }}
+    SELECT 
+        ps_partkey,
+        ps_suppkey,
+        ps_availqty,
+        ps_supplycost    
+    FROM {{ ref('brz_partsupp') }}
 ),
 brz_part AS (
-    SELECT * FROM {{ ref('brz_part') }}
+    SELECT 
+        p_name,
+        p_type
+    FROM {{ ref('brz_part') }}
 ),
 brz_supplier AS (
-    SELECT * FROM {{ ref('brz_supplier') }}
+    SELECT
+        s_name
+    FROM {{ ref('brz_supplier') }}
 )
 
 SELECT

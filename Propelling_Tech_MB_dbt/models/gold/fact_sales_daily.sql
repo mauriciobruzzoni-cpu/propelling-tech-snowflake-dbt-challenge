@@ -4,11 +4,21 @@
     ) 
 }}
 
--- Hacemos un join previo con los clientes y proveedores para traernos 
--- su nación ANTES de agrupar.
+-- Hacemos un join previo con los clientes y proveedores para traernos su nación antes de agrupar.
 WITH base_lineitem AS (
     SELECT 
-        l.*,
+        l.order_date,
+        l.id_customer,
+        l.id_supplier,
+        l.id_order,
+        l.id_lineitem,
+        l.quantity,
+        l.gross_amount,
+        l.net_amount,
+        l.total_supply_cost,
+        l.profit_margin,
+        l.transit_days,
+        l.is_delayed,
         c.id_nation AS id_customer_nation,
         s.id_nation AS id_supplier_nation
     FROM {{ ref('slv_lineitem') }} l

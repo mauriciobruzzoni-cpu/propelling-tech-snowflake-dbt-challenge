@@ -1,7 +1,14 @@
 {{ config(materialized='table') }}
 
 WITH brz_supplier_cte AS (
-    SELECT * FROM {{ ref('brz_supplier') }}
+    SELECT 
+        s_suppkey,
+        s_name,
+        s_address,
+        s_phone,
+        s_acctbal,
+        s_nationkey
+    FROM {{ ref('brz_supplier') }}
 )
 
 SELECT

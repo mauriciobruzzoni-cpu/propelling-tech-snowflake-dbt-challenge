@@ -1,10 +1,20 @@
 {{ config(materialized='table') }}
 
 WITH brz_customer_cte AS (
-    SELECT * FROM {{ ref('brz_customer') }}
+    SELECT  c_custkey, 
+            c_name, 
+            c_address, 
+            c_nationkey, 
+            c_phone, 
+            c_acctbal, 
+            c_mktsegment 
+    FROM {{ ref('brz_customer') }}
 ),
 tiers_cte AS (
-    SELECT * FROM {{ ref('brz_seed_customer_tiers') }}
+    SELECT  min_balance, 
+            max_balance, 
+            customer_tier 
+    FROM {{ ref('brz_seed_customer_tiers') }}
 )
 
 SELECT
@@ -22,7 +32,6 @@ SELECT
     {{ audit_fields() }}
     
 FROM brz_customer_cte c
--- El truco maestro: un JOIN condicional evaluando rangos
 LEFT JOIN tiers_cte t
     ON c.c_acctbal >= t.min_balance 
    AND c.c_acctbal <= t.max_balance

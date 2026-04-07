@@ -1,10 +1,15 @@
 {{ config(materialized='table') }}
 
 WITH brz_nation_cte AS (
-    SELECT * FROM {{ ref('brz_nation') }}
+    SELECT  n_nationkey, 
+            n_name, 
+            n_regionkey 
+    FROM {{ ref('brz_nation') }}
 ),
 brz_region_cte AS (
-    SELECT * FROM {{ ref('brz_region') }}
+    SELECT  r_regionkey, 
+            r_name 
+    FROM {{ ref('brz_region') }}
 )
 
 SELECT

@@ -8,7 +8,27 @@
 }}
 
 WITH slv_lineitem_cte AS (
-    SELECT * FROM {{ ref('slv_lineitem') }}
+    SELECT  
+        id_lineitem,
+        id_order,
+        id_part,
+        id_supplier,
+        id_customer,
+        order_date,
+        ship_date,
+        commit_date,
+        receipt_date,
+        quantity,
+        gross_amount,
+        net_amount,
+        total_amount_with_tax,
+        total_supply_cost,
+        profit_margin,
+        transit_days,
+        delay_days,
+        is_delayed,   
+        {{ audit_fields() }}
+    FROM {{ ref('slv_lineitem') }}
     
     {% if is_incremental() %}
     WHERE updated_at > (

@@ -6,10 +6,21 @@
 }}
 
 WITH brz_part_cte AS (
-    SELECT * FROM {{ ref('brz_part') }}
+    SELECT 
+        p_partkey,
+        p_name,
+        p_mfgr,
+        p_brand,
+        p_type,
+        p_size,
+        p_retailprice  
+    FROM {{ ref('brz_part') }}
 ),
 categories_cte AS (
-    SELECT * FROM {{ ref('brz_seed_material_categories') }}
+    SELECT 
+        material_base,
+        finance_category
+    FROM {{ ref('brz_seed_material_categories') }}
 )
 
 SELECT

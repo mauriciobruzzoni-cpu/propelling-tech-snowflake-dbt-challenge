@@ -1,5 +1,10 @@
 WITH source AS (
-    SELECT * 
+    SELECT
+        ps_partkey,
+        ps_suppkey,
+        ps_availqty,
+        ps_supplycost,
+        ps_comment
     FROM {{ source('tpch', 'partsupp') }}
 )
 

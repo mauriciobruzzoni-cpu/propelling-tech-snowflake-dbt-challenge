@@ -1,5 +1,9 @@
 WITH source AS (
-    SELECT * 
+    SELECT
+        n_nationkey,
+        n_name,
+        n_regionkey,
+        n_comment
     FROM {{ source('tpch', 'nation') }}
 )
 
