@@ -11,12 +11,14 @@ WITH brz_partsupp AS (
 ),
 brz_part AS (
     SELECT 
+        p_partkey,
         p_name,
         p_type
     FROM {{ ref('brz_part') }}
 ),
 brz_supplier AS (
     SELECT
+        s_suppkey,
         s_name
     FROM {{ ref('brz_supplier') }}
 )
