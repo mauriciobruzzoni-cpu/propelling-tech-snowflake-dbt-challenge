@@ -1,4 +1,3 @@
-
 {{ config(materialized='table') }}
 
 WITH brz_partsupp AS (
