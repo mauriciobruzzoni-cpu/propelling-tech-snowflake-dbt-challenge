@@ -17,5 +17,4 @@ This dbt project transforms raw TPC-H data from Snowflake into a Kimball dimensi
 1. Clone this repository.
 2. Ensure you have access to a Snowflake account with the `SNOWFLAKE_SAMPLE_DATA` database shared.
 3. Configure your `profiles.yml` to point to your Snowflake compute warehouse and `PROPELLING_TECH_MB_DB` database.
-4. Run `dbt deps` to install dependencies.
-5. Run `dbt build` to execute seeds, tests, and models.
+4. Run `dbt build` to execute seeds, tests, and models.
