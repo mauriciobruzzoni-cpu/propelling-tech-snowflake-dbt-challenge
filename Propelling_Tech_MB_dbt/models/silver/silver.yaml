@@ -1,7 +1,0 @@
-version: 2
-
-models:
-  - name: slv_part
-    columns:
-      - name: finance_category
-        description: "Categoría financiera no asignada cruzando con el maestro de materiales."
